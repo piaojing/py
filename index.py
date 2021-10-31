@@ -1,21 +1,20 @@
 #!"C:\Users\V\AppData\Local\Programs\Python\Python310\python.exe"
-print("content-type: text/html;charset=utf-8\n")
+print("Content-Type: text/html")
 print()
-
-import cgi
-
-# get url query string
+import cgi, os
+ 
+files = os.listdir('data')
+listStr = ''
+for item in files:
+    listStr = listStr + '<li><a href="index.py?id={item}">{name}</a></li>'.format(name=item)
+     
 form = cgi.FieldStorage()
-print(form, '<br>')
 if 'id' in form:
-    pageId=form['id'].value # get id from url query string
-    description=open('data/'+pageId, 'r').read()
-    print("./data/"+pageId, '<br>')
+    pageId = form["id"].value
+    description = open('data/'+pageId, 'r').read()
 else:
-    pageId="Welcome"    
-    description="Hello WEB!"
-print(pageId)
-
+    pageId = 'Welcome'
+    description = 'Hello, web'
 print('''<!doctype html>
 <html>
 <head>
@@ -25,12 +24,10 @@ print('''<!doctype html>
 <body>
   <h1><a href="index.py">WEB</a></h1>
   <ol>
-    <li><a href="index.py?id=HTML">HTML</a></li>
-    <li><a href="index.py?id=CSS">CSS</a></li>
-    <li><a href="index.py?id=JavaScript">JavaScript</a></li>
+    {listStr}
   </ol>
   <h2>{title}</h2>
   <p>{desc}</p>
 </body>
 </html>
-'''.format(title=pageId, desc=description))
+'''.format(title=pageId, desc=description, listStr=listStr))
