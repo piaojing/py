@@ -17,11 +17,13 @@ if 'id' in form:
     pageId = form["id"].value
     description = open('data/'+pageId, 'r').read()
     update_link = '<a href="update.py?id={}">update</a>'.format(pageId)
+    
+    # add function into form action, onclick: if true run default action else run reload page 
     delete_action = '''
-        <form action="process_delete.py" method="post">
-            <input type="hidden" name="pageId" value="{}">
-            <input type="submit" value="delete">
-        </form>
+      <form onsubmit="javascript:myFunction();" method="post" name="theForm">
+        <input type="hidden" name="pageId" value="{}" />
+        <input type="submit" value="delete"/>
+      </form>
     '''.format(pageId)
 else:
     pageId = 'Welcome'
@@ -44,6 +46,7 @@ print('''<!doctype html>
   <h2>{title}</h2>
   <p>{desc}</p>
   {delete_action}
+  <script src="./js/delete.js"></script>
 </body>
 </html>
 '''.format(title=pageId, desc=description, listStr=listStr, update_link=update_link, delete_action=delete_action))

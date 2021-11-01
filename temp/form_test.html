@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div>
+      <input type="hidden" name="pageId" value="{}" />
+      <input
+        type="submit"
+        value="delete"
+        onclick="myClick()"
+        onSubmit="return myClick();"
+      />
+    </div>
+
+    <script>
+      function myClick() {
+        let del_conf = window.confirm("DELETE?");
+        if (del_conf) {
+          window.location = "test";
+        } else {
+          alert(del_conf);
+        }
+      }
+    </script>
+  </body>
+</html>
