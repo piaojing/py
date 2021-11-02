@@ -1,7 +1,6 @@
 #!"C:\Users\V\AppData\Local\Programs\Python\Python310\python.exe"
 
-# add "delete"
-# delete button is visible when list is selected, else case invisible. 
+# add "delete with confirm alert"
 
 print("Content-Type: text/html")
 print()
